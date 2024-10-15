@@ -1,25 +1,28 @@
 <template>
-  <UCard>
-    <template #header>
-      <UIcon name="i-mdi-dog" class="mr-2 w-6 h-6" /><span class="uppercase">Galleta's House</span>
-      {{ domain }}
-    </template>
-  </UCard>
-  
+  <div class="py-4 px-6 border-b border-gray-200 dark:border-gray-800 bg-primary/15">
+    <div class="flex justify-between">
+      <div>
+        <UIcon name="i-mdi-dog" class="mr-2 w-6 h-6 align-middle" /><span class="uppercase text-lg font-semibold">Galleta's House</span>
+        <span class="font-light text-sm ml-1">{{ domain }}</span>
+      </div>
+      <USelect icon="i-mdi-translate" v-model="locale" :options="['es', 'en']" />
+    </div>
+  </div>
+
   <UContainer class="mt-6">
     <div class="mb-6">
-      El único servidor con la aprobación oficial de Galleta
+      {{ $t('title') }}
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
       <UCard>
         <template #header>
-          <span class="text-primary">Jellyfin - Free Software Media System</span>
+          <span class="text-primary">Jellyfin - {{ $t('jellyfinSubtitle') }}</span>
         </template>
         <p>
-          Reproductor y visualizador de películas, series, videos, fotos, música y libros.
+          {{ $t('jellyfinDescription') }}
         </p>
-        <p class="text-xs mt-2">Contraseña: <span class="italic">raspberry</span></p>
+        <p class="text-xs mt-2">{{ $t('password') }}: <span class="italic">raspberry</span></p>
         
         <template #footer>
           <UButton class="mr-4 mb-2" icon="i-mdi-web" to="http://192.168.1.97:8096" external>Online</UButton>
@@ -29,10 +32,10 @@
 
       <UCard>
         <template #header>
-          <span class="text-primary">Unidad en red</span>
+          <span class="text-primary">{{ $t('networkTitle') }}</span>
         </template>
         <p>
-          Conecta el servidor a tu dispositivo para transferir y compartir archivos.
+          {{ $t('networkDescription') }}
         </p>
         <template #footer>
           <UButton class="mr-4 mb-2" icon="i-mdi-microsoft-windows" @click="modalWindows = true">Windows</UButton>
@@ -44,28 +47,28 @@
     <UModal v-model="modalWindows">
       <UCard>
         <template #header>
-          Unidad de red | Windows
+          {{ $t('networkTitle') }} | Windows
         </template>
 
         <ol class="list-decimal list-inside">
-          <li>Abrir Navegador de archivos > Este equipo > Conectar a unidad de red</li>
+          <li>{{ $t('networkWindowsStep1') }}</li>
           <li>
-            Ingresar datos
+            {{ $t('networkWindowsStep2') }}
             <ul class="list-disc list-inside indent-4">
-              <li>Unidad: Cualquier valor disponible</li>
-              <li>Carpeta: <span class="font-bold">\\192.168.1.97\Nube</span></li>
-              <li>Marcar la opción "Conectar con otras credenciales"</li>
+              <li>{{ $t('drive') }}: {{ $t('driveValue') }}</li>
+              <li>{{ $t('path') }}: <span class="font-bold">\\192.168.1.97\Nube</span></li>
+              <li>{{ $t('checkCredentials') }}</li>
             </ul>
           </li>
-          <li>Clic en "Finalizar"</li>
+          <li>{{ $t('networkWindowsStep3') }}</li>
           <li>
-            Ingresar credenciales
+            {{ $t('networkWindowsStep4') }}
             <ul class="list-disc list-inside indent-4">
-              <li>Nombre de usuario: <span class="font-bold">pi</span></li>
-              <li>Contraseña: <span class="font-bold">raspberry</span></li>
+              <li>{{ $t('username') }}: <span class="font-bold">pi</span></li>
+              <li>{{ $t('password') }}: <span class="font-bold">raspberry</span></li>
             </ul>
           </li>
-          <li>Clic en "Aceptar"</li>
+          <li>{{ $t('networkWindowsStep5') }}</li>
         </ol>
       </UCard>
     </UModal>
@@ -73,41 +76,32 @@
     <UModal v-model="modalAndroid">
       <UCard>
         <template #header>
-          Conexión remota | Android
+          {{ $t('networkTitle') }} | Android
         </template>
-        <p>Usar app de navegación de archivos. Las instrucciones aplican para la app <UButton to="https://play.google.com/store/apps/details?id=com.alphainventor.filemanager" external icon="i-mdi-launch" trailing variant="link">File Manager</UButton></p>
+        <p>{{ $t('networkAndroidText') }} <UButton to="https://play.google.com/store/apps/details?id=com.alphainventor.filemanager" external icon="i-mdi-launch" trailing variant="link">File Manager</UButton></p>
         <ol class="list-decimal list-inside">
-          <li>Home > Remote > Add a remote location</li>
-          <li>Seleccionar opción <span class="font-bold">SMB</span></li>
+          <li>{{ $t('networkAndroidStep1') }}</li>
+          <li>{{ $t('networkAndroidStep2') }} <span class="font-bold">SMB</span></li>
           <li>
-            Ingresar datos
+            {{ $t('networkAndroidStep3') }}
             <ul class="list-disc list-inside indent-4">
-              <li>Host: <span class="font-bold">\\192.168.1.97\Nube</span></li>
-              <li>Username: <span class="font-bold">pi</span></li>
-              <li>Password: <span class="font-bold">raspberry</span></li>
+              <li>{{ $t('host') }}: <span class="font-bold">\\192.168.1.97\Nube</span></li>
+              <li>{{ $t('username') }}: <span class="font-bold">pi</span></li>
+              <li>{{ $t('password') }}: <span class="font-bold">raspberry</span></li>
             </ul>
           </li>
-          <li>Clic en "Ok"</li>
+          <li>{{ $t('networkAndroidStep4') }}</li>
         </ol>
       </UCard>
     </UModal>
-    <!-- <UCard class="mt-10">
-      <template #header>
-        <div class="flex justify-between">
-          <h1>Sugar roomie</h1>
-          <ColorScheme><USelect v-model="$colorMode.preference" :options="['system', 'light', 'dark']" /></ColorScheme>
-        </div>
-      </template>
-      <UButton icon="i-heroicons-book-open" to="https://ui.nuxt.com" target="_blank">Open Nuxt UI Documentation</UButton>
-    </UCard> -->
   </UContainer>
 </template>
 
 <script setup>
 useHead({
   title: 'Sugar roomie',
-  // link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}],
 })
+const { locale } = useI18n()
 const modalWindows = ref(false)
 const modalAndroid = ref(false)
 

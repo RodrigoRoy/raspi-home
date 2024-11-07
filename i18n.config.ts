@@ -25,13 +25,18 @@ export default defineI18nConfig(() => ({
             networkAndroidStep3: 'Ingresar datos',
             host: 'Host',
             networkAndroidStep4: 'Clic en "Ok"',
+            about: 'Acerca de',
+            aboutGalleta1: 'Su cumpleaños es el',
+            aboutGalletaBirthday: '30 de noviembre',
+            aboutGalleta2: 'Conoce más sobre',
+            gallery: 'Galería',
         },
         en: {
             title: 'The only server with official approval from Galleta',
             jellyfinSubtitle: 'Free Software Media System',
             jellyfinDescription: 'Player and viewer for movies, series, videos, photos, music and books.',
-            networkTitle: 'Network',
-            networkDescription: 'Player and viewer for movies, series, videos, photos, music and books.',
+            networkTitle: 'Network unit',
+            networkDescription: 'Connect the server to your device for file transfer and file sharing.',
             password: 'Password',
             networkWindowsStep1: 'Open File Explorer > This PC > Map network drive',
             networkWindowsStep2: 'Type info',
@@ -49,6 +54,11 @@ export default defineI18nConfig(() => ({
             networkAndroidStep3: 'Type',
             host: 'Host',
             networkAndroidStep4: 'Click "Ok"',
+            about: 'About',
+            aboutGalleta1: 'Her birthday is',
+            aboutGalletaBirthday: 'November 30th',
+            aboutGalleta2: 'Lear more about',
+            gallery: 'Gallery',
         }
     }
 }))

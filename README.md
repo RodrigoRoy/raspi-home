@@ -1,6 +1,8 @@
-# Nuxt UI Minimal Starter
+# Galleta's House
 
-Look at [Nuxt docs](https://nuxt.com/docs/getting-started/introduction) and [Nuxt UI docs](https://ui.nuxt.com) to learn more.
+Hey, congrats! You found the source code of Galleta's House, a.k.a. Sugar Roomie. Intended to use a local website that expose some (stunning) services runnin on a Raspberry Pi, e.g. [Jellyfin](https://jellyfin.org/).
+
+Use this template if you want to create a similar basic website. It's made with ♥️ + [Nuxt](https://nuxt.com/) and some useful libraries like [Nuxt UI](https://ui.nuxt.com), [tailwindcss](https://tailwindcss.com/), [i18n](https://i18n.nuxtjs.org/), [Day.js](https://day.js.org/).
 
 ## Setup
 
@@ -10,14 +12,8 @@ Make sure to install the dependencies:
 # npm
 npm install
 
-# pnpm
-pnpm install
-
 # yarn
 yarn install
-
-# bun
-bun install
 ```
 
 ## Development Server
@@ -28,14 +24,8 @@ Start the development server on `http://localhost:3000`:
 # npm
 npm run dev
 
-# pnpm
-pnpm run dev
-
 # yarn
 yarn dev
-
-# bun
-bun run dev
 ```
 
 ## Production
@@ -46,30 +36,7 @@ Build the application for production:
 # npm
 npm run build
 
-# pnpm
-pnpm run build
-
 # yarn
 yarn build
-
-# bun
-bun run build
 ```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+This software is under the [GNU General Public Licence v3.0](./LICENCE). Learn more about [open source license](https://choosealicense.com/).

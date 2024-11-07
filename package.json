@@ -1,7 +1,8 @@
 {
-  "name": "nuxt-app",
+  "name": "sugar-roomie",
   "private": true,
   "type": "module",
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -13,6 +14,7 @@
     "@nuxt/devtools": "latest",
     "@nuxt/ui": "^2.18.5",
     "@nuxtjs/i18n": "^8.5.5",
+    "dayjs-nuxt": "^2.1.11",
     "nuxt": "^3.12.4"
   },
   "dependencies": {

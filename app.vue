@@ -65,6 +65,27 @@
       </UCard>
     </div>
 
+    <div class="flex justify-center">
+      <div class="w-10/12 text-center">
+        <UCarousel ref="carouselRef" v-slot="{ item }" :items="commentsData" :ui="{ item: 'w-full snap-start basis-full'}" class="my-6 pb-12" indicators>
+          <figure class="text-center mx-auto">
+            <svg class="w-10 h-10 mx-auto mb-3 text-gray-400 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
+              <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z"/>
+            </svg>
+            <blockquote>
+              <p class="text-2xl italic font-medium text-gray-900 dark:text-white">"{{ item.content }}"</p>
+            </blockquote>
+            <figcaption class="flex items-center justify-center mt-6 space-x-3 rtl:space-x-reverse">
+              <img class="w-6 h-6 rounded-full" :src="`avatar/${item.avatar}.jpg`" alt="Profile picture">
+              <div class="flex items-center">
+                <cite class="pe-3 font-medium text-gray-900 dark:text-white">{{ item.name }}</cite>
+              </div>
+            </figcaption>
+          </figure>
+        </UCarousel>
+      </div>
+    </div>
+
     <UModal v-model="modalWindows">
       <UCard>
         <template #header>
@@ -116,6 +137,7 @@
       </UCard>
     </UModal>
   </UContainer>
+  <!-- {{ comments }} -->
 </template>
 
 <script setup>
@@ -126,6 +148,31 @@ useHead({
 })
 
 const { locale } = useI18n()
+// const { data: comments } = await useFetch('/api/comment')
+
+const carouselRef = ref()
+const commentsData = [
+  {
+    name: 'Rodrigo',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    avatar: 1,
+  },
+  {
+    name: 'Irene',
+    content: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    avatar: 3,
+  },
+  {
+    name: 'Jon',
+    content: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+    avatar: 5,
+  },
+  {
+    name: 'Vanessa Rubi',
+    content: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum..',
+    avatar: 8,
+  }
+]
 
 // Set location for day.js
 dayjs.locale(locale)
@@ -147,6 +194,18 @@ watch(locale, (newLocale) => {
 
 // Change domain extension every 10 seconds
 onMounted(() => {
+  // Autoplay carousel
+  setInterval(() => {
+    if (!carouselRef.value) return
+    
+    if (carouselRef.value.page === carouselRef.value.pages) {
+      return carouselRef.value.select(0)
+    }
+    
+    carouselRef.value.next()
+  }, 10000)
+
+  // Autochange domain extension
   window.setInterval(() => {
     domain.value = domainExtensions[Math.floor(Math.random() * domainExtensions.length)]
   }, 10000)

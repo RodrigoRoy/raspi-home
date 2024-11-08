@@ -8,16 +8,19 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "prisma": "npx prisma migrate dev"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxt/ui": "^2.18.5",
     "@nuxtjs/i18n": "^8.5.5",
+    "@prisma/client": "^5.22.0",
     "dayjs-nuxt": "^2.1.11",
     "nuxt": "^3.12.4"
   },
   "dependencies": {
-    "@iconify-json/mdi": "^1.2.1"
+    "@iconify-json/mdi": "^1.2.1",
+    "@prisma/nuxt": "^0.0.35"
   }
 }

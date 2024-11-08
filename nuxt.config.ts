@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", '@nuxtjs/i18n', 'dayjs-nuxt'],
+  modules: ["@nuxt/ui", '@nuxtjs/i18n', 'dayjs-nuxt', '@prisma/nuxt'],
   compatibilityDate: "2024-10-14",
   dayjs: {
     locales: ['es', 'en'],
@@ -17,5 +17,13 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: false,
     }
+  },
+  prisma: {
+    installCLI: true,
+    installClient: true,
+    generateClient: true,
+    formatSchema: true,
+    installStudio: true,
+    autoSetupPrisma: false,
   }
 })

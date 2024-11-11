@@ -69,18 +69,18 @@
         <!-- <UButton class="mr-4 mb-2" icon="i-mdi-instagram" disabled>Instagram</UButton> -->
       </UCard>
 
-      <!-- Visit book section -->
+      <!-- Guestbook section -->
       <UCard class="bg-gradient-to-br hover:from-violet-950">
         <div class="mb-4">
           <img src="/Writing.jpg" alt="" class="object-cover">
           <p class="text-lg font-medium my-3">
-            <span class="text-primary">Libro de visitas</span>
+            <span class="text-primary">{{ $t('guestbook') }}</span>
           </p>
           <p>
-            Deja un mensaje en el libro de visitas
+            {{ $t('guestbookDescription') }}.
           </p>
         </div>
-        <UButton class="mr-4 mb-2" icon="i-mdi-send" @click="modalVisit = true; rngPicture()">Comentario</UButton>
+        <UButton class="mr-4 mb-2" icon="i-mdi-send" @click="modalVisit = true; rngPicture()">{{ $t('message') }}</UButton>
       </UCard>
     </div>
 
@@ -164,8 +164,8 @@
       <UCard :ui="{ base: 'h-full flex flex-col', rounded: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800', body: { base: 'grow' } }">
         <template #header>
           <div class="flex items-center justify-between">
-            <p>
-              Comentario
+            <p class="uppercase text-sm">
+              {{ $t('guestbook') }}
             </p>
             <UButton color="gray" variant="ghost" icon="i-mdi-close" class="-my-1" @click="modalVisit = false" />
           </div>
@@ -174,15 +174,15 @@
         <!-- Comment form -->
         <UForm class="space-y-4" :schema="commentSchema" :state="comment" @submit="onSubmit">
           <UFormGroup label="" name="content">
-            <UTextarea v-model="comment.content" rows="5" autoresize placeholder="Escribe tu comentario..." />
+            <UTextarea v-model="comment.content" rows="5" autoresize :placeholder="`${$t('formContent')}...`" />
           </UFormGroup>
           
           <UFormGroup label="" name="name">
-            <UInput v-model="comment.name" placeholder="Tu nombre" />
+            <UInput v-model="comment.name" :placeholder="`${$t('formName')}...`" />
           </UFormGroup>
 
           <UButton type="submit" icon="i-mdi-send" :loading="sendingData">
-            Enviar
+            {{ $t('send') }}
           </UButton>
         </UForm>
 
@@ -225,8 +225,8 @@ const carouselRef = ref()
 
 // User comment validation schema (zod library)
 const commentSchema = z.object({
-  name: z.string().max(32, { message: 'Límite de 32 caracteres'}).trim(),
-  content: z.string().min(1, { message: 'Olvidaste escribir'}).max(280, { message: 'Límite de 280 caracteres'}).trim(),
+  name: z.string().max(64, { message: 'No más de 64 caracteres, por favor'}).trim(),
+  content: z.string().min(1, { message: 'Olvidaste escribir'}).max(280, { message: 'No más de 280 caracteres, por favor'}).trim(),
 })
 
 // User comment

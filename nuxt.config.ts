@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", '@nuxtjs/i18n', 'dayjs-nuxt', '@prisma/nuxt'],
+  modules: ["@nuxt/ui", '@nuxtjs/i18n', 'dayjs-nuxt', '@prisma/nuxt', '@pinia/nuxt'],
   compatibilityDate: "2024-10-14",
   dayjs: {
     locales: ['es', 'en'],

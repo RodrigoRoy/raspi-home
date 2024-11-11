@@ -1,28 +1,66 @@
 <template>
   <!-- Navbar -->
-  <div class="py-4 px-6 border-b border-gray-200 dark:border-gray-800 bg-primary/15">
-    <UContainer>
-      <div class="flex justify-between">
-        <div>
-          <UIcon name="i-mdi-dog" class="mr-2 w-6 h-6 align-middle" /><span class="uppercase text-lg font-semibold">Galleta's House</span>
-          <span class="font-light text-sm ml-1">{{ domain }}</span>
-        </div>
-        <div class="flex">
-          <USelect icon="i-mdi-translate" v-model="locale" :options="['es', 'en']" />
-          <UButton icon="i-mdi-github" variant="link" to="https://github.com/RodrigoRoy/raspi-home" external />
-        </div>
+  <AppBar></AppBar>
+
+  <!-- Main container -->
+  <UContainer class="my-6">
+
+    <!-- Carousel of comments -->
+    <div class="flex justify-center">
+      <div class="mb-6 w-10/12 text-center">
+        <UCarousel ref="carouselRef" v-slot="{ item }" :items="comments" :ui="{ item: 'w-full snap-start basis-full'}" class="my-6 pb-12" indicators>
+          <figure class="text-center mx-auto">
+            <svg class="size-8 mx-auto mb-1 text-gray-400 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
+              <path d="M7.39762 10.3C7.39762 11.0733 7.14888 11.7 6.6514 12.18C6.15392 12.6333 5.52552 12.86 4.76621 12.86C3.84979 12.86 3.09047 12.5533 2.48825 11.94C1.91222 11.3266 1.62421 10.4467 1.62421 9.29999C1.62421 8.07332 1.96459 6.87332 2.64535 5.69999C3.35231 4.49999 4.33418 3.55332 5.59098 2.85999L6.4943 4.25999C5.81354 4.73999 5.26369 5.27332 4.84476 5.85999C4.45201 6.44666 4.19017 7.12666 4.05926 7.89999C4.29491 7.79332 4.56983 7.73999 4.88403 7.73999C5.61716 7.73999 6.21938 7.97999 6.69067 8.45999C7.16197 8.93999 7.39762 9.55333 7.39762 10.3ZM14.6242 10.3C14.6242 11.0733 14.3755 11.7 13.878 12.18C13.3805 12.6333 12.7521 12.86 11.9928 12.86C11.0764 12.86 10.3171 12.5533 9.71484 11.94C9.13881 11.3266 8.85079 10.4467 8.85079 9.29999C8.85079 8.07332 9.19117 6.87332 9.87194 5.69999C10.5789 4.49999 11.5608 3.55332 12.8176 2.85999L13.7209 4.25999C13.0401 4.73999 12.4903 5.27332 12.0713 5.85999C11.6786 6.44666 11.4168 7.12666 11.2858 7.89999C11.5215 7.79332 11.7964 7.73999 12.1106 7.73999C12.8437 7.73999 13.446 7.97999 13.9173 8.45999C14.3886 8.93999 14.6242 9.55333 14.6242 10.3Z" fill="currentColor"></path>
+            </svg>
+            <blockquote>
+              <p class="italic font-medium text-gray-900 dark:text-white">"{{ item.content }}"</p>
+            </blockquote>
+            <figcaption class="flex items-center justify-center mt-3 space-x-3 rtl:space-x-reverse">
+              <img class="size-12 rounded-full" :src="`avatar/${item.picture}`" alt="Profile picture">
+              <div class="flex items-center">
+                <cite class="not-italic pe-3 font-medium text-gray-900 dark:text-neutral-400">{{ item.name }}</cite>
+              </div>
+            </figcaption>
+          </figure>
+        </UCarousel>
       </div>
-    </UContainer>
-  </div>
-
-  <!-- Introduction -->
-  <UContainer class="mt-6">
-    <div class="mb-6">
-      {{ $t('title') }}
     </div>
-
-    <!-- Jellyfin section -->
+    
+    <!-- Grid of cards/sections -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+
+      <!-- Galleta section -->
+      <UCard class="bg-gradient-to-br hover:from-violet-950">
+        <div class="mb-4">
+          <img src="/Galleta.jpg" alt="" class="object-cover">
+          <p class="text-lg font-medium my-3">
+            <span class="text-primary">{{ $t('about') }} Galleta</span>
+          </p>
+          <p>
+            {{ $t('aboutGalleta1') }} <span class="font-bold">{{ $t('aboutGalletaBirthday') }}</span>, {{ toBirthday }}! {{ $t('aboutGalleta2') }} Galleta:
+          </p>
+        </div>
+        <UButton class="mr-4 mb-2" icon="i-mdi-spotify" to="https://open.spotify.com/playlist/0TjV4qPqCJO6xykqniHVIh?si=cf09bfaddd3948ba" external>Playlist</UButton>
+        <UButton class="mr-4 mb-2" icon="i-mdi-google-photos" to="https://photos.app.goo.gl/CYNG1btyaDXMh99q7" external>{{ $t('gallery') }}</UButton>
+        <!-- <UButton class="mr-4 mb-2" icon="i-mdi-instagram" disabled>Instagram</UButton> -->
+      </UCard>
+      
+      <!-- Guestbook section -->
+      <UCard class="bg-gradient-to-br hover:from-violet-950">
+        <div class="mb-4">
+          <img src="/Writing.jpg" alt="" class="object-cover">
+          <p class="text-lg font-medium my-3">
+            <span class="text-primary">{{ $t('guestbook') }}</span>
+          </p>
+          <p>
+            {{ $t('guestbookDescription') }}.
+          </p>
+        </div>
+        <UButton class="mr-4 mb-2" icon="i-mdi-send" @click="modalVisit = true; rngPicture()">{{ $t('message') }}</UButton>
+      </UCard>
+
+      <!-- Jellyfin section -->
       <UCard class="bg-gradient-to-br hover:from-violet-950">
         <div class="mb-4">
           <img src="/Jellyfin.png" alt="" class="object-scale-down">
@@ -52,58 +90,6 @@
         <UButton class="mr-4 mb-2" icon="i-mdi-microsoft-windows" @click="modalWindows = true">Windows</UButton>
         <UButton class="mr-4 mb-2" icon="i-mdi-android" @click="modalAndroid = true">Android</UButton>
       </UCard>
-
-      <!-- Galleta section -->
-      <UCard class="bg-gradient-to-br hover:from-violet-950">
-        <div class="mb-4">
-          <img src="/Galleta.jpg" alt="" class="object-cover">
-          <p class="text-lg font-medium my-3">
-            <span class="text-primary">{{ $t('about') }} Galleta</span>
-          </p>
-          <p>
-            {{ $t('aboutGalleta1') }} <span class="font-bold">{{ $t('aboutGalletaBirthday') }}</span>, {{ toBirthday }}! {{ $t('aboutGalleta2') }} Galleta:
-          </p>
-        </div>
-        <UButton class="mr-4 mb-2" icon="i-mdi-spotify" to="https://open.spotify.com/playlist/0TjV4qPqCJO6xykqniHVIh?si=cf09bfaddd3948ba" external>Playlist</UButton>
-        <UButton class="mr-4 mb-2" icon="i-mdi-google-photos" to="https://photos.app.goo.gl/CYNG1btyaDXMh99q7" external>{{ $t('gallery') }}</UButton>
-        <!-- <UButton class="mr-4 mb-2" icon="i-mdi-instagram" disabled>Instagram</UButton> -->
-      </UCard>
-
-      <!-- Guestbook section -->
-      <UCard class="bg-gradient-to-br hover:from-violet-950">
-        <div class="mb-4">
-          <img src="/Writing.jpg" alt="" class="object-cover">
-          <p class="text-lg font-medium my-3">
-            <span class="text-primary">{{ $t('guestbook') }}</span>
-          </p>
-          <p>
-            {{ $t('guestbookDescription') }}.
-          </p>
-        </div>
-        <UButton class="mr-4 mb-2" icon="i-mdi-send" @click="modalVisit = true; rngPicture()">{{ $t('message') }}</UButton>
-      </UCard>
-    </div>
-
-    <!-- Carousel of comments -->
-    <div class="flex justify-center">
-      <div class="w-10/12 text-center">
-        <UCarousel ref="carouselRef" v-slot="{ item }" :items="comments" :ui="{ item: 'w-full snap-start basis-full'}" class="my-6 pb-12" indicators>
-          <figure class="text-center mx-auto">
-            <svg class="size-8 mx-auto mb-1 text-gray-400 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
-              <path d="M7.39762 10.3C7.39762 11.0733 7.14888 11.7 6.6514 12.18C6.15392 12.6333 5.52552 12.86 4.76621 12.86C3.84979 12.86 3.09047 12.5533 2.48825 11.94C1.91222 11.3266 1.62421 10.4467 1.62421 9.29999C1.62421 8.07332 1.96459 6.87332 2.64535 5.69999C3.35231 4.49999 4.33418 3.55332 5.59098 2.85999L6.4943 4.25999C5.81354 4.73999 5.26369 5.27332 4.84476 5.85999C4.45201 6.44666 4.19017 7.12666 4.05926 7.89999C4.29491 7.79332 4.56983 7.73999 4.88403 7.73999C5.61716 7.73999 6.21938 7.97999 6.69067 8.45999C7.16197 8.93999 7.39762 9.55333 7.39762 10.3ZM14.6242 10.3C14.6242 11.0733 14.3755 11.7 13.878 12.18C13.3805 12.6333 12.7521 12.86 11.9928 12.86C11.0764 12.86 10.3171 12.5533 9.71484 11.94C9.13881 11.3266 8.85079 10.4467 8.85079 9.29999C8.85079 8.07332 9.19117 6.87332 9.87194 5.69999C10.5789 4.49999 11.5608 3.55332 12.8176 2.85999L13.7209 4.25999C13.0401 4.73999 12.4903 5.27332 12.0713 5.85999C11.6786 6.44666 11.4168 7.12666 11.2858 7.89999C11.5215 7.79332 11.7964 7.73999 12.1106 7.73999C12.8437 7.73999 13.446 7.97999 13.9173 8.45999C14.3886 8.93999 14.6242 9.55333 14.6242 10.3Z" fill="currentColor"></path>
-            </svg>
-            <blockquote>
-              <p class="italic font-medium text-gray-900 dark:text-white">"{{ item.content }}"</p>
-            </blockquote>
-            <figcaption class="flex items-center justify-center mt-3 space-x-3 rtl:space-x-reverse">
-              <img class="size-12 rounded-full" :src="`avatar/${item.picture}`" alt="Profile picture">
-              <div class="flex items-center">
-                <cite class="not-italic pe-3 font-medium text-gray-900 dark:text-neutral-400">{{ item.name }}</cite>
-              </div>
-            </figcaption>
-          </figure>
-        </UCarousel>
-      </div>
     </div>
 
     <!-- Network drive modal -->
@@ -204,6 +190,18 @@
       </UCard>
     </UModal>
   </UContainer>
+
+  <!-- Footer -->
+  <div class="py-2 px-6 border-b border-gray-200 dark:border-gray-800 bg-primary/10">
+    <UContainer>
+      <div class="flex justify-center">
+        <div class="text-slate-400 font-light">
+          <span class="text-sm font-light">{{ $t('title') }}</span>
+          <UButton icon="i-mdi-github" variant="link" to="https://github.com/RodrigoRoy/raspi-home" external />
+        </div>
+      </div>
+    </UContainer>
+  </div>
 </template>
 
 <script setup>
@@ -243,9 +241,6 @@ const modalWindows = ref(false)
 const modalAndroid = ref(false)
 const modalVisit = ref(false)
 const sendingData = ref(false)
-
-const domain = ref('.com')
-const domainExtensions = ['.online', '.life', '.pro', '.net', '.tv', '.ai', '.site', '.live', '.club', '.world', '.tech', '.company', '.media', '.wiki', '.app']
 
 const galletaBirthday = dayjs('2024-11-30')
 let toBirthday = dayjs().to(galletaBirthday)
@@ -294,11 +289,6 @@ onMounted(() => {
     }
     
     carouselRef.value.next()
-  }, 10000)
-
-  // Autochange domain extension
-  window.setInterval(() => {
-    domain.value = domainExtensions[Math.floor(Math.random() * domainExtensions.length)]
   }, 10000)
 })
 </script>

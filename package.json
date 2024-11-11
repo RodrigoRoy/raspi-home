@@ -21,7 +21,9 @@
   },
   "dependencies": {
     "@iconify-json/mdi": "^1.2.1",
+    "@pinia/nuxt": "^0.7.0",
     "@prisma/nuxt": "^0.0.35",
+    "pinia": "^2.2.6",
     "zod": "^3.23.8"
   }
 }

@@ -41,9 +41,9 @@
             {{ $t('aboutGalleta1') }} <span class="font-bold">{{ $t('aboutGalletaBirthday') }}</span>, {{ toBirthday }}! {{ $t('aboutGalleta2') }} Galleta:
           </p>
         </div>
-        <UButton class="mr-4 mb-2" icon="i-mdi-spotify" to="https://open.spotify.com/playlist/0TjV4qPqCJO6xykqniHVIh?si=cf09bfaddd3948ba" external>Playlist</UButton>
+        <UButton class="mr-4 mb-2" icon="i-mdi-instagram" to="https://www.instagram.com/galleta.catlleta/" external >Instagram</UButton>
         <UButton class="mr-4 mb-2" icon="i-mdi-google-photos" to="https://photos.app.goo.gl/CYNG1btyaDXMh99q7" external>{{ $t('gallery') }}</UButton>
-        <!-- <UButton class="mr-4 mb-2" icon="i-mdi-instagram" disabled>Instagram</UButton> -->
+        <UButton class="mr-4 mb-2" icon="i-mdi-spotify" to="https://open.spotify.com/playlist/0TjV4qPqCJO6xykqniHVIh?si=cf09bfaddd3948ba" external>Playlist</UButton>
       </UCard>
       
       <!-- Guestbook section -->

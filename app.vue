@@ -242,7 +242,7 @@ const modalAndroid = ref(false)
 const modalVisit = ref(false)
 const sendingData = ref(false)
 
-const galletaBirthday = dayjs('2024-11-30')
+const galletaBirthday = dayjs('2025-11-30')
 let toBirthday = dayjs().to(galletaBirthday)
 
 /**

@@ -1,5 +1,9 @@
 import prisma from "~/lib/prisma"
 
 export default defineEventHandler(async(event) => {
-    return await prisma.comment.findMany()
+    return await prisma.comment.findMany({
+        orderBy: {
+            createdAt: 'desc'
+        }
+    })
 })
